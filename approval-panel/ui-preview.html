@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approval Management Panel - UI Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e293b;
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            transition: all 0.2s;
+        }
+
+        .nav-link.active {
+            color: #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 0.375rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #f1f5f9;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Status badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-pending {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-approved {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        /* File icons */
+        .file-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-right: 0.75rem;
+        }
+
+        .file-icon.pdf {
+            background-color: #fee2e2;
+            color: #dc2626;
+        }
+
+        .file-icon.excel {
+            background-color: #dcfce7;
+            color: #16a34a;
+        }
+
+        .file-icon.image {
+            background-color: #dbeafe;
+            color: #2563eb;
+        }
+
+        /* Grid layouts */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .gap-2 {
+            gap: 0.5rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+        }
+
+        .text-gray-500 {
+            color: #6b7280;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+
+        .p-2 {
+            padding: 0.5rem;
+        }
+
+        .bg-gray-50 {
+            background-color: #f9fafb;
+        }
+
+        .rounded {
+            border-radius: 0.25rem;
+        }
+
+        /* Activity avatar */
+        .activity-avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .stats-card {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .text-green-600 { color: #059669; }
+        .text-red-600 { color: #dc2626; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">📋 Approval Panel</a>
+                <nav class="nav">
+                    <a href="#" class="nav-link active">Dashboard</a>
+                    <a href="#" class="nav-link">New Request</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container" style="padding-top: 2rem; padding-bottom: 2rem;">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="card-title">Approval Dashboard</h1>
+            <button class="btn btn-secondary">🔄 Refresh</button>
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="grid-3 mb-6">
+            <div class="card stats-card">
+                <div class="stat-number">1</div>
+                <div class="text-sm text-gray-500">Pending Approvals</div>
+            </div>
+            <div class="card stats-card">
+                <div class="stat-number text-green-600">1</div>
+                <div class="text-sm text-gray-500">Approved</div>
+            </div>
+            <div class="card stats-card">
+                <div class="stat-number text-red-600">0</div>
+                <div class="text-sm text-gray-500">Rejected</div>
+            </div>
+        </div>
+
+        <!-- Approval Request Card 1 -->
+        <div class="card">
+            <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                    <div class="file-icon image">IMG</div>
+                    <div>
+                        <h3 class="font-semibold">
+                            <a href="#" style="color: #2563eb;">Site Survey Photos.zip</a>
+                        </h3>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-sm text-gray-500">Site Photo</span>
+                            <span class="text-sm text-gray-500">•</span>
+                            <span class="text-sm text-gray-500">Downtown Office Building</span>
+                        </div>
+                    </div>
+                </div>
+                <span class="status-badge status-pending">Pending</span>
+            </div>
+
+            <!-- Approvers -->
+            <div class="mb-4">
+                <h4 class="font-semibold mb-2">Approvers</h4>
+                <div style="display: grid; gap: 0.5rem;">
+                    <div class="flex items-center justify-between p-2 bg-gray-50 rounded">
+                        <div class="flex items-center gap-2">
+                            <div class="activity-avatar">M</div>
+                            <div>
+                                <div class="text-sm font-semibold">manager@company.com</div>
+                                <div class="text-sm text-gray-500">Jan 15, 2024 10:30</div>
+                            </div>
+                        </div>
+                        <span class="status-badge status-approved">Approved</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 bg-gray-50 rounded">
+                        <div class="flex items-center gap-2">
+                            <div class="activity-avatar">S</div>
+                            <div>
+                                <div class="text-sm font-semibold">supervisor@company.com</div>
+                            </div>
+                        </div>
+                        <span class="status-badge status-pending">Pending</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Details -->
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1rem;">
+                <div>
+                    <div class="text-sm text-gray-500">Due Date</div>
+                    <div class="text-sm">Jan 20, 2024</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-500">Created</div>
+                    <div class="text-sm">Jan 15, 2024 09:00</div>
+                </div>
+            </div>
+
+            <!-- Latest Comment -->
+            <div class="mb-4">
+                <div class="text-sm text-gray-500 mb-1">Latest Comment</div>
+                <div class="text-sm bg-gray-50 p-2 rounded" style="font-style: italic;">
+                    "Please review the photos from the morning site visit"
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex justify-between items-center">
+                <div class="flex gap-2">
+                    <button class="btn btn-secondary">📊 Show Activity</button>
+                    <button class="btn btn-secondary">📧 Send Reminder</button>
+                </div>
+                <div class="flex items-center gap-1 text-sm text-gray-500">
+                    <span title="Reminder enabled">🔔</span>
+                    <span title="Notification enabled">📬</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Approval Request Card 2 -->
+        <div class="card">
+            <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                    <div class="file-icon pdf">PDF</div>
+                    <div>
+                        <h3 class="font-semibold">
+                            <a href="#" style="color: #2563eb;">Structural Analysis Report.pdf</a>
+                        </h3>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-sm text-gray-500">Structural PDF</span>
+                            <span class="text-sm text-gray-500">•</span>
+                            <span class="text-sm text-gray-500">Downtown Office Building</span>
+                        </div>
+                    </div>
+                </div>
+                <span class="status-badge status-approved">Approved</span>
+            </div>
+
+            <!-- Approvers -->
+            <div class="mb-4">
+                <h4 class="font-semibold mb-2">Approvers</h4>
+                <div style="display: grid; gap: 0.5rem;">
+                    <div class="flex items-center justify-between p-2 bg-gray-50 rounded">
+                        <div class="flex items-center gap-2">
+                            <div class="activity-avatar">S</div>
+                            <div>
+                                <div class="text-sm font-semibold">structural@company.com</div>
+                                <div class="text-sm text-gray-500">Jan 14, 2024 15:45</div>
+                            </div>
+                        </div>
+                        <span class="status-badge status-approved">Approved</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 bg-gray-50 rounded">
+                        <div class="flex items-center gap-2">
+                            <div class="activity-avatar">P</div>
+                            <div>
+                                <div class="text-sm font-semibold">project.lead@company.com</div>
+                                <div class="text-sm text-gray-500">Jan 14, 2024 16:20</div>
+                            </div>
+                        </div>
+                        <span class="status-badge status-approved">Approved</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Details -->
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1rem;">
+                <div>
+                    <div class="text-sm text-gray-500">Due Date</div>
+                    <div class="text-sm">Jan 18, 2024</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-500">Created</div>
+                    <div class="text-sm">Jan 14, 2024 14:00</div>
+                </div>
+            </div>
+
+            <!-- Latest Comment -->
+            <div class="mb-4">
+                <div class="text-sm text-gray-500 mb-1">Latest Comment</div>
+                <div class="text-sm bg-gray-50 p-2 rounded" style="font-style: italic;">
+                    "Final approval granted"
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex justify-between items-center">
+                <div class="flex gap-2">
+                    <button class="btn btn-secondary">📊 Show Activity</button>
+                </div>
+                <div class="flex items-center gap-1 text-sm text-gray-500">
+                    <span title="Notification enabled">📬</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Request Form Preview -->
+        <div class="card" style="margin-top: 2rem;">
+            <h2 class="card-title mb-4">📝 New Request Form</h2>
+            
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; font-weight: 500; margin-bottom: 0.5rem;">Select File *</label>
+                <button class="btn btn-primary">📁 Select File from Google Drive</button>
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; font-weight: 500; margin-bottom: 0.5rem;">Category *</label>
+                <select style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.375rem;">
+                    <option>Drawing</option>
+                    <option>Budget</option>
+                    <option>Site Photo</option>
+                    <option>Structural PDF</option>
+                    <option>Excel Estimate</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; font-weight: 500; margin-bottom: 0.5rem;">Approvers *</label>
+                <input type="text" placeholder="manager@company.com, supervisor@company.com" 
+                       style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.375rem;">
+                <div class="text-sm text-gray-500" style="margin-top: 0.25rem;">Enter email addresses separated by commas</div>
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; font-weight: 500; margin-bottom: 0.5rem;">Due Date *</label>
+                <input type="date" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.375rem;">
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0;">
+                    <input type="checkbox" checked>
+                    <label>Send reminder if not approved by due date</label>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0;">
+                    <input type="checkbox" checked>
+                    <label>Notify me when approved</label>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%;">Submit Approval Request</button>
+        </div>
+    </div>
+</body>
+</html>
